@@ -1,0 +1,97 @@
+PRODUCT MANAGEMENT SYSTEM - CI/CD PIPELINE
+
+1. Spring Boot Application
+   - Created Product Management System using Java 17 and Spring Boot.
+   - Created CRUD APIs for Product management.
+   - Connected the application with MySQL.
+
+2. Docker
+   - Created a Dockerfile for the Spring Boot application.
+   - Built the Docker image:
+     docker build -t product-management-system .
+
+3. Docker Compose
+   - Created docker-compose.yml.
+   - Added MySQL container.
+   - Added Product Management application container.
+   - Configured Docker networking.
+   - Added MySQL health check.
+   - Application connects to MySQL using:
+     mysql:3306
+
+4. Git
+   - Initialized Git repository.
+   - Created initial commit.
+   - Connected local project with GitHub.
+   - Pushed the project to GitHub.
+
+5. Jenkins
+   - Installed Jenkins on Windows.
+   - Created Jenkins pipeline job:
+     ProductManagementSystem-CI-CD
+   - Jenkins checks out source code from GitHub.
+   - Jenkins runs Maven build and tests.
+   - Jenkins builds the Docker image.
+   - Jenkins deploys the application using Docker Compose.
+   - Jenkins verifies the running application.
+
+6. Jenkins Pipeline Flow
+
+   GitHub
+      ↓
+   Jenkins Checkout
+      ↓
+   Start MySQL
+      ↓
+   Maven Build + Test
+      ↓
+   Build Docker Image
+      ↓
+   Docker Compose Deployment
+      ↓
+   Verify Application
+
+7. GitHub Webhook
+   - Enabled "GitHub hook trigger for GITScm polling" in Jenkins.
+   - Created a GitHub webhook.
+   - GitHub could not directly access local Jenkins.
+   - Used Cloudflare Tunnel to expose Jenkins temporarily.
+   - Cloudflare Tunnel forwards:
+     Public URL → localhost:8080
+   - Jenkins is accessible through the Cloudflare URL.
+
+8. Current Status
+
+   CI/CD pipeline manually triggered:
+   WORKING
+
+   GitHub → Webhook → Jenkins automatic trigger:
+   CURRENTLY TESTING
+
+9. Next Step
+
+   Make a small Git change.
+   Commit the change.
+   Push to GitHub.
+   GitHub sends webhook to Jenkins.
+   Jenkins automatically starts the pipeline.
+
+   Expected flow:
+
+   Git Push
+      ↓
+   GitHub
+      ↓
+   Webhook
+      ↓
+   Cloudflare Tunnel
+      ↓
+   Jenkins
+      ↓
+   Build + Test
+      ↓
+   Docker Build
+      ↓
+   Docker Compose Deploy
+      ↓
+   Application Verification
